@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+
+import { Routes, Route, BrowserRouter } from "react-router-dom"
+
+import Nav from "./components/Nav";
+import HomePage from "./pages/HomePage";
+import MoviePage from "./pages/MoviePage";
+import BookmarkPage from "./pages/BookmarkPage";
+import MovieDetail from "./pages/MovieDetail";
+import CastPage from "./pages/CastPage";
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className=" text-[#a5a3a3] h-screen w-screen  overflow-x-hidden flex md:flex-row gap-4 flex-col">
+      <Nav />
+      <div className="flex-1 md:w-3/4 w-full">
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/movies" element={<MoviePage />} />
+            <Route path="/movies/:id" element={<MovieDetail />} />
+            <Route path="/bookmark" element={<BookmarkPage />} />
+            <Route path="/cast" element={<CastPage />} />
+          </Routes>
+        </BrowserRouter>
+
+      </div>
     </div>
   );
 }
+
 
 export default App;
