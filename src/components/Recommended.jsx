@@ -1,19 +1,34 @@
-import BookmarkIcon from "./BookmarkIcon";
-const Recommended = (props) => {
+import React from "react";
+import Bookmark from "./Bookmark";
+import { Link } from "react-router-dom";
+
+const Recommended = ({ img, date, type, rating, alt, name, id, clickFunc }) => {
+  const reload = () => {
+    window.scrollTo(0, 0);
+  };
   return (
-    <div className="w-64 h-78 rounded-md relative overflow-hidden shadow ">
-      <BookmarkIcon />
-      <img
-        src={props.img}
-        alt={props.alt}
-        className="w-full h-40 left-0 top-0 -z-10"
-      />
-      <div>
-        <div className="flex gap-2 items-center">
-          <p>{props.genre}</p>
-          <p>{props.date}</p>
+    <div className="relative md:w-68 h-86 rounded-[10px] overflow-hidden ">
+      <Bookmark />
+      <Link to={`/movie_details/${id}`}>
+        {" "}
+        <img
+          src={img}
+          alt={alt}
+          className="w-full h-[80%] rounded-[10px]  "
+          onClick={reload}
+        />
+      </Link>
+      <div className="w-full h-[20%]">
+        <div>
+          <p className="text-gray-200  ">
+            <span className="font-semibold ">Release Date:</span> {date}
+          </p>
+          <p className="text-gray-200 my-0 ">
+            {" "}
+            <span className="font-semibold ">Rating:</span> {rating}
+          </p>
         </div>
-        <h4 className="text-xl font-bold">{props.name}</h4>
+        <p className=" text-lg font-bold text-white w-fit ">{name}</p>
       </div>
     </div>
   );

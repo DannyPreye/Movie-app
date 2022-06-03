@@ -1,20 +1,30 @@
-import BookmarkIcon from "./BookmarkIcon";
-const Trending = (props) => {
+import React from "react";
+import Bookmark from "./Bookmark";
+import { Link } from "react-router-dom";
+
+const Trending = ({ img, date, type, rating, alt, name, id }) => {
   return (
-    <div className="md:w-62 w-52 h-60  rounded-md relative overflow-hidden shadow ">
-      <BookmarkIcon />
-      <div className="w-full h-full absolute top-0 left-0 bg-gradient-to-b from-[#130120b4] to-[#09001ac9] "></div>
+    <div className="relative w-64  h-72 rounded-[10px] overflow-hidden flex-shrink-0">
+      <Bookmark />
+      <Link to={`/movie_details/${id}`}>
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-[#0000009c] to-[#22222291] z-[100]"></div>
+      </Link>
       <img
-        src={props.img}
-        alt={props.alt}
-        className="absolute w-full h-full left-0 top-0 -z-10"
+        src={img}
+        alt={alt}
+        className="w-full h-full absolute top-0 left-0"
       />
-      <div className="absolute bottom-4 left-4">
-        <div className="flex gap-2 text-sm ">
-          <p>{props.genre} </p>
-          <p>{props.date}</p>
+      <div className="absolute left-[50%] translate-x-[-50%] bottom-5 z-[1000] w-[90%]">
+        <div>
+          <p className="text-gray-200  ">
+            <span className="font-semibold ">Release Date:</span> {date}
+          </p>
+          <p className="text-gray-200  ">
+            {" "}
+            <span className="font-semibold ">Rating:</span> {rating}
+          </p>
         </div>
-        <h4 className="text-xl font-bold">{props.name}</h4>
+        <p className=" text-lg font-bold text-white w-fit ">{name}</p>
       </div>
     </div>
   );

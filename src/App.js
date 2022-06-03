@@ -1,33 +1,30 @@
 
-import { Routes, Route, BrowserRouter } from "react-router-dom"
-
-import Nav from "./components/Nav";
-import HomePage from "./pages/HomePage";
-import MoviePage from "./pages/MoviePage";
-import BookmarkPage from "./pages/BookmarkPage";
-import MovieDetail from "./pages/MovieDetail";
-import CastPage from "./pages/CastPage";
+import { Route, Routes, BrowserRouter as Router } from "react-router-dom"
+import Nav from './Components/Nav'
+import HomePage from './Pages/HomePage'
+import MovieDetails from './Pages/MovieDetails'
 
 
-function App() {
+
+
+const App = () => {
+
+
   return (
-    <div className=" text-[#a5a3a3] h-screen w-screen  overflow-x-hidden flex md:flex-row gap-4 flex-col">
-      <Nav />
-      <div className="flex-1 md:w-3/4 w-full">
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/movies" element={<MoviePage />} />
-            <Route path="/movies/:id" element={<MovieDetail />} />
-            <Route path="/bookmark" element={<BookmarkPage />} />
-            <Route path="/cast" element={<CastPage />} />
-          </Routes>
-        </BrowserRouter>
 
+    <Router>
+      <div className='md:flex'>
+        <Nav />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/movie_details/:id" element={<MovieDetails />} />
+          <Route path="/Movie-app" element={<HomePage />} />
+
+        </Routes>
       </div>
-    </div>
-  );
+    </Router>
+
+  )
 }
 
-
-export default App;
+export default App
