@@ -1,24 +1,47 @@
 import React from "react";
 
-const Reviews = ({ content, name, date }) => {
+const Reviews = ({ reviews }) => {
   return (
-    <div className="flex flex-wrap -m-4">
-      <div className="p-4 md:w-1/2 w-full">
-        <div className="h-full bg-gray-100 p-8 rounded">
-          <p className="leading-relaxed mb-6">{content}</p>
+    <section className="  dark:bg-gray-900">
+      <div className="container  px-6 py-10 mx-auto">
+        <h1 className="text-3xl font-semibold text-gray-300 capitalize lg:text-4xl dark:text-white">
+          Reviews
+        </h1>
+        <div className="grid grid-cols-1 gap-8 mt-8 xl:mt-12 xl:gap-12 md:grid-cols-2 ">
+          {reviews.map((review) => {
+            return (
+              <div className="p-8 space-y-3 border-2 border-blue-400 dark:border-blue-300 rounded-xl">
+                <span className="inline-block text-blue-500 dark:text-blue-400">
+                  <img
+                    src={
+                      `https://image.tmdb.org/t/p/w500${review.author_details["avatar_path"]}` &&
+                      `${review.author_details["avatar_path"]}`
+                    }
+                    alt="reviewer "
+                  />
+                  {console.log(
+                    `https://image.tmdb.org/t/p/w500${
+                      review.author_details["avatar_path"] &&
+                      review.author_details["avatar_path"]
+                    }`
+                  )}
+                </span>
 
-          <img
-            alt="testimonial"
-            src="https://dummyimage.com/107x107"
-            className="w-12 h-12 rounded-full flex-shrink-0 object-cover object-center"
-          />
-          <span className="flex-grow flex flex-col pl-4">
-            <span className="title-font font-medium text-gray-900">{name}</span>
-            <span className="text-gray-500 text-sm">{date}</span>
-          </span>
+                <h1 className="text-2xl font-semibold text-gray-700 capitalize dark:text-white">
+                  {review.author}
+                </h1>
+
+                <div></div>
+                <p
+                  className="text-gray-500 w-fit dark:text-gray-300"
+                  dangerouslySetInnerHTML={{ __html: review.content }}
+                ></p>
+              </div>
+            );
+          })}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

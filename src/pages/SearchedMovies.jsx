@@ -2,6 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import RecMovie from "../Components/RecMovie";
+import Seacrch from "../Components/Seacrch";
 
 const SearchedMovies = () => {
   const [movies, setMovies] = useState([]);
@@ -17,11 +18,17 @@ const SearchedMovies = () => {
         setloading(true);
         setMovies(data.results);
       });
-  }, []);
+  }, [query]);
 
   return (
     <>
-      <RecMovie secName={`Result for "${query}"`} rec={movies} />
+      <div className="container mx-auto my-10 px-4 flex-1 ">
+        <Seacrch />
+        <RecMovie secName={`Result for "${query}"`} rec={movies} />
+        {!movies.length ? (
+          <p className="text-lg text-gray-300">{`No Movie name "${query}" found`}</p>
+        ) : null}
+      </div>
     </>
   );
 };
