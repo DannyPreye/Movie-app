@@ -70,6 +70,7 @@ const MovieDetails = () => {
     )
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
         setVideo(data.results[0]);
       });
   };
@@ -118,15 +119,19 @@ const MovieDetails = () => {
                     <span className="title-font font-medium text-2xl text-gray-300">
                       Watch Trailer
                     </span>
-                    <button className="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
-                      <a
-                        href={`https://www.youtube.com/watch?v=${video["key"]}`}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        Video
-                      </a>
-                    </button>
+                    {video ? (
+                      <button className="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
+                        <a
+                          href={`https://www.youtube.com/watch?v=${video.key}`}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          Video
+                        </a>
+                      </button>
+                    ) : (
+                      "no video available"
+                    )}
                   </div>
                 </div>
               </div>

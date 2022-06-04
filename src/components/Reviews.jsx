@@ -21,7 +21,7 @@ const Reviews = ({ reviews }) => {
                   />
                   {console.log(
                     `https://image.tmdb.org/t/p/w500${
-                      review.author_details["avatar_path"] &&
+                      review.author_details["avatar_path"] ||
                       review.author_details["avatar_path"]
                     }`
                   )}
@@ -31,9 +31,8 @@ const Reviews = ({ reviews }) => {
                   {review.author}
                 </h1>
 
-                <div></div>
                 <p
-                  className="text-gray-500 w-fit dark:text-gray-300"
+                  className="text-gray-500 dark:text-gray-300"
                   dangerouslySetInnerHTML={{ __html: review.content }}
                 ></p>
               </div>
