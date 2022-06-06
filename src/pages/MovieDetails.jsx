@@ -70,7 +70,6 @@ const MovieDetails = () => {
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setVideo(data.results[0]);
       });
   };
@@ -88,7 +87,7 @@ const MovieDetails = () => {
               <div className="lg:w-4/5 mx-auto flex flex-wrap">
                 <img
                   alt="ecommerce"
-                  className="lg:w-1/2 md:w-full lg:h-fit w-[200px] h-1/2 md:object-cover object-center rounded"
+                  className="lg:w-1/2 md:w-full lg:h-fit w-full h-1/2 md:object-cover object-center rounded"
                   src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                 />
                 <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
@@ -110,33 +109,30 @@ const MovieDetails = () => {
                         })}
                       </div>
                     </div>
-                    <div className="flex md:ml-6 items-center">
+                    <div className="flex flex-wrap ml-6 items-center">
                       <span className="mr-3 font-bold">Rating:</span>
                       <p className="italic">{movie.vote_average}</p>
                     </div>
-                  </div>
-                  <div className="flex">
-                    <span className="title-font font-medium text-2xl text-gray-300">
-                      Watch Trailer
-                    </span>
-                    {video ? (
-                      <button className="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
-                        <a
-                          href={`https://www.youtube.com/watch?v=${video.key}`}
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          Video
-                        </a>
-                      </button>
-                    ) : (
-                      "no video available"
-                    )}
                   </div>
                 </div>
               </div>
             </div>
 
+            <div className="container  px-6 py-10 mx-auto">
+              <h1 className="text-3xl font-semibold text-gray-300 capitalize lg:text-4xl dark:text-white mb-5">
+                Watch Trailer
+              </h1>
+              {!video.length ? (
+                <iframe
+                  name="frame"
+                  title="trailers"
+                  className="w-full md:h-[700px] h-[500px]"
+                  src={`https://www.youtube.com/embed/${video.key}`}
+                ></iframe>
+              ) : (
+                <p>No video for this movie</p>
+              )}
+            </div>
             <Reviews reviews={reviews} />
 
             <SimilarMovie movies={similar} clickFunc={reload} />

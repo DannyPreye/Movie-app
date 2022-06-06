@@ -10,7 +10,10 @@ const Reviews = ({ reviews }) => {
         <div className="grid grid-cols-1 gap-8 mt-8 xl:mt-12 xl:gap-12 md:grid-cols-2 ">
           {reviews.map((review) => {
             return (
-              <div className="p-8 space-y-3 border-2 border-blue-400 dark:border-blue-300 rounded-xl">
+              <div
+                key={review.id}
+                className="p-8 space-y-3 border-2 border-blue-400 dark:border-blue-300 rounded-xl"
+              >
                 <span className="inline-block text-blue-500 dark:text-blue-400">
                   <img
                     src={

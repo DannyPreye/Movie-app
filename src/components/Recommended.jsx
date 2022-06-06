@@ -2,13 +2,23 @@ import React from "react";
 import Bookmark from "./Bookmark";
 import { Link } from "react-router-dom";
 
-const Recommended = ({ img, date, type, rating, alt, name, id, clickFunc }) => {
+const Recommended = ({
+  img,
+  date,
+  type,
+  rating,
+  alt,
+  name,
+  id,
+  clickFunc,
+  onclick,
+}) => {
   const reload = () => {
     window.scrollTo(0, 0);
   };
   return (
     <div className="relative md:w-68 h-86 rounded-[10px] overflow-hidden ">
-      <Bookmark />
+      <Bookmark book_id={id} onclick={onclick} />
       <Link to={`/movie_details/${id}`}>
         {" "}
         <img
