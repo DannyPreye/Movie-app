@@ -19,12 +19,16 @@ const Nav = () => {
             </Link>
           </div>
           <div className="flex  md:grid gap-2  text-2xl text-white">
-            <div>
-              <MdLocalMovies />
-            </div>
-            <div>
-              <BsLaptop />
-            </div>
+            <Link to={"/movies"}>
+              <div>
+                <MdLocalMovies />
+              </div>
+            </Link>
+            <Link to={"/tvseries"}>
+              <div>
+                <BsLaptop />
+              </div>
+            </Link>
             <Link to={"/bookmark"}>
               <div className="relative">
                 <FaBookmark />

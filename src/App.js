@@ -6,6 +6,8 @@ import MovieDetails from './Pages/MovieDetails'
 import SearchedMovies from "./Pages/SearchedMovies"
 import { BookmarkProvider } from "./Components/BookMarkContext"
 import BookMarkPage from "./Pages/BookMarkPage"
+import Tvseries from "./Pages/Tvseries"
+import MoviesPage from "./Pages/MoviesPage"
 
 
 const App = () => {
@@ -24,6 +26,8 @@ const App = () => {
             <Route path="/Movie-app" element={<HomePage />} />
             <Route path="/search/:query" element={<SearchedMovies />} />
             <Route path="/bookmark" element={<BookMarkPage />} />
+            <Route path="/tvseries" element={<Tvseries />} />
+            <Route path="/movies" element={<MoviesPage />} />
           </Routes>
 
         </div>
