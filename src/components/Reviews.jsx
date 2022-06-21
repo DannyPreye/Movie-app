@@ -22,12 +22,6 @@ const Reviews = ({ reviews }) => {
                     }
                     alt="reviewer "
                   />
-                  {console.log(
-                    `https://image.tmdb.org/t/p/w500${
-                      review.author_details["avatar_path"] ||
-                      review.author_details["avatar_path"]
-                    }`
-                  )}
                 </span>
 
                 <h1 className="text-2xl font-semibold text-gray-700 capitalize dark:text-white">

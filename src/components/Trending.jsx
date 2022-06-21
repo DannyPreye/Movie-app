@@ -6,7 +6,7 @@ const Trending = ({ img, date, type, rating, alt, name, id }) => {
   return (
     <div className="relative w-64  h-72 rounded-[10px] overflow-hidden flex-shrink-0">
       <Bookmark />
-      <Link to={`/movie_details/${id}`}>
+      <Link to={`/movie_details/${id}/${type}`}>
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-[#0000009c] to-[#22222291] z-[100]"></div>
       </Link>
       <img

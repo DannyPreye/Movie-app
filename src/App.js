@@ -20,7 +20,7 @@ const App = () => {
           <Nav />
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/movie_details/:id" element={<MovieDetails />} />
+            <Route path="/movie_details/:id/:type" element={<MovieDetails />} />
             <Route path="/Movie-app" element={<HomePage />} />
             <Route path="/search/:query" element={<SearchedMovies />} />
             <Route path="/bookmark" element={<BookMarkPage />} />

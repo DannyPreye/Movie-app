@@ -17,10 +17,9 @@ const Recommended = ({
     window.scrollTo(0, 0);
   };
   return (
-    <div className="relative md:w-68 h-86 rounded-[10px] overflow-hidden ">
+    <div className="relative md:w-68 h-86 md:max-h-fit rounded-[10px] overflow-hidden ">
       <Bookmark book_id={id} onclick={onclick} />
-      <Link to={`/movie_details/${id}`}>
-        {" "}
+      <Link to={`/movie_details/${id}/${type}`}>
         <img
           src={img}
           alt={alt}

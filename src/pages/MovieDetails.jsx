@@ -10,19 +10,23 @@ const MovieDetails = () => {
   const [movie, setmovie] = useState({
     genres: [],
   });
+  const [tv, settv] = useState({
+    genres: [],
+  });
   const [loading, setloading] = useState(false);
   const [similar, setsimilar] = useState([]);
   const [reviews, setreviews] = useState([]);
   const [errorMessage, setError] = useState();
   const [video, setVideo] = useState([]);
 
-  let { id } = useParams();
+  let { id, type } = useParams();
 
   useEffect(() => {
-    fetchMovie();
-    fetchSimilar();
-    fetchReview();
-    fetchVideo();
+    console.log("type", type);
+    type === "movie" ? fetchMovie() : fetchTv();
+    type === "movie" ? fetchMovieSimilar() : fetchTvSimilar();
+    type === "movie" ? fetchMovieReview() : fetchTvReview();
+    type === "movie" ? fetchVideoMovie() : fetchVideoTV();
   }, [id]);
 
   const fetchMovie = () => {
@@ -45,7 +49,28 @@ const MovieDetails = () => {
         setError(error);
       });
   };
-  const fetchSimilar = () => {
+  const fetchTv = () => {
+    fetch(
+      `https://api.themoviedb.org/3/tv/${id}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
+    )
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          throw "No information for this movie yet";
+        }
+      })
+      .then((data) => {
+        setloading(true);
+        console.log(data);
+        setmovie(data);
+      })
+      .catch((error) => {
+        setloading(true);
+        setError(error);
+      });
+  };
+  const fetchMovieSimilar = () => {
     fetch(
       `https://api.themoviedb.org/3/movie/${id}/similar?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
     )
@@ -54,8 +79,17 @@ const MovieDetails = () => {
         setsimilar(data.results);
       });
   };
-
-  const fetchReview = () => {
+  const fetchTvSimilar = () => {
+    fetch(
+      `https://api.themoviedb.org/3/tv/${id}/similar?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setsimilar(data.results);
+        console.log("similar", data.results);
+      });
+  };
+  const fetchMovieReview = () => {
     fetch(
       `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
     )
@@ -64,13 +98,32 @@ const MovieDetails = () => {
         setreviews(data.results);
       });
   };
-  const fetchVideo = () => {
+  const fetchTvReview = () => {
+    fetch(
+      `https://api.themoviedb.org/3/tv/${id}/reviews?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setreviews(data.results);
+      });
+  };
+  const fetchVideoMovie = () => {
     fetch(
       `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
     )
       .then((res) => res.json())
       .then((data) => {
         setVideo(data.results[0]);
+      });
+  };
+  const fetchVideoTV = () => {
+    fetch(
+      `https://api.themoviedb.org/3/tv/${id}/videos?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setVideo(data.results[0]);
+        console.log("video", data.results[0]);
       });
   };
   const reload = () => {
@@ -96,7 +149,7 @@ const MovieDetails = () => {
                     Movie Name
                   </h2>
                   <h1 className="text-gray-200 text-3xl title-font font-medium mb-1">
-                    {!movie.name ? movie.title : movie.name}
+                    {!movie.name ? movie.title : tv.name && tv.title}
                   </h1>
 
                   <p className="leading-relaxed">{movie.overview}.</p>
@@ -104,7 +157,7 @@ const MovieDetails = () => {
                     <div className="flex">
                       <span className="mr-3 font-bold">Genre:</span>
                       <div className="flex gap-2 italic">
-                        {movie.genres.map((genre) => {
+                        {movie.genres?.map((genre) => {
                           return <p key={genre.id}> {genre.name}</p>;
                         })}
                       </div>
@@ -122,12 +175,12 @@ const MovieDetails = () => {
               <h1 className="text-3xl font-semibold text-gray-300 capitalize lg:text-4xl dark:text-white mb-5">
                 Watch Trailer
               </h1>
-              {!video.length ? (
+              {!video?.length ? (
                 <iframe
                   name="frame"
                   title="trailers"
                   className="w-full md:h-[700px] h-[500px]"
-                  src={`https://www.youtube.com/embed/${video.key}`}
+                  src={`https://www.youtube.com/embed/${video?.key}`}
                 ></iframe>
               ) : (
                 <p>No video for this movie</p>
@@ -135,7 +188,11 @@ const MovieDetails = () => {
             </div>
             <Reviews reviews={reviews} />
 
-            <SimilarMovie movies={similar} clickFunc={reload} />
+            <SimilarMovie
+              movies={similar}
+              clickFunc={reload}
+              type={type === "movie" ? "movie" : "tv"}
+            />
           </section>
         )
       ) : (

@@ -35,6 +35,7 @@ const SliderTrending = ({ movies }) => {
                 movie.release_date ? movie.release_date : movie.first_air_date
               }
               rating={movie.vote_average}
+              type={movie.media_type}
             />
             ;
           </SplideSlide>

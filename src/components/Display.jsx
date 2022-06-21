@@ -6,7 +6,7 @@ import Recommended from "../Components/Recommended";
 import "@splidejs/react-splide/css";
 import RecMovie from "./RecMovie";
 
-const Display = ({ movies, rec }) => {
+const Display = ({ movies, rec, type }) => {
   return (
     <div className="container mx-auto my-10 px-4 flex-1 ">
       <Seacrch />
@@ -18,7 +18,7 @@ const Display = ({ movies, rec }) => {
         <SliderTrending movies={movies} />
       </div>
       {/* ********************** Recommended movies ************************* */}
-      <RecMovie rec={rec} secName={"Recommended"} />
+      <RecMovie rec={rec} secName={"Recommended"} type={type} />
     </div>
   );
 };
