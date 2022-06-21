@@ -22,7 +22,6 @@ const MovieDetails = () => {
   let { id, type } = useParams();
 
   useEffect(() => {
-    console.log("type", type);
     type === "movie" ? fetchMovie() : fetchTv();
     type === "movie" ? fetchMovieSimilar() : fetchTvSimilar();
     type === "movie" ? fetchMovieReview() : fetchTvReview();
@@ -62,7 +61,7 @@ const MovieDetails = () => {
       })
       .then((data) => {
         setloading(true);
-        console.log(data);
+
         setmovie(data);
       })
       .catch((error) => {
@@ -86,7 +85,6 @@ const MovieDetails = () => {
       .then((res) => res.json())
       .then((data) => {
         setsimilar(data.results);
-        console.log("similar", data.results);
       });
   };
   const fetchMovieReview = () => {
@@ -123,7 +121,6 @@ const MovieDetails = () => {
       .then((res) => res.json())
       .then((data) => {
         setVideo(data.results[0]);
-        console.log("video", data.results[0]);
       });
   };
   const reload = () => {

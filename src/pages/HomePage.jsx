@@ -9,7 +9,7 @@ import BookContext from "../Components/BookMarkContext";
 const HomePage = () => {
   const { trending, recommended, loading, errorMessage } =
     useContext(BookContext);
-  console.log(trending);
+
   return (
     <div className={`flex-1 py-4 px-5 ${!loading ? "h-screen" : ""}`}>
       {loading ? (
