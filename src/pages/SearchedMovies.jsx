@@ -11,7 +11,7 @@ const SearchedMovies = () => {
 
   useEffect(() => {
     fetch(
-      ` https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&query=${query}}&page=1&include_adult=false`
+      ` https://api.themoviedb.org/3/search/multi?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&query=${query}}&page=1&include_adult=false`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -20,11 +20,17 @@ const SearchedMovies = () => {
       });
   }, [query]);
 
+  console.log(movies.media_type);
+
   return (
     <>
       <div className="container mx-auto my-10 px-4 flex-1 ">
         <Seacrch />
-        <RecMovie secName={`Result for "${query}"`} rec={movies} />
+        <RecMovie
+          secName={`Result for "${query}"`}
+          rec={movies}
+          type={movies.media_type}
+        />
         {!movies.length ? (
           <p className="text-lg text-gray-300">{`No Movie name "${query}" found`}</p>
         ) : null}

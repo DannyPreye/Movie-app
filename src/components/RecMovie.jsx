@@ -19,6 +19,7 @@ const RecMovie = ({ rec, secName, type }) => {
               onclick={() => {
                 addBookMark(movie);
               }}
+              search_type={movie.media_type}
               type={type}
               id={movie.id}
               key={movie.id}

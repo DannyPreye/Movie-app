@@ -8,6 +8,7 @@ import { BookmarkProvider } from "./Components/BookMarkContext"
 import BookMarkPage from "./Pages/BookMarkPage"
 import Tvseries from "./Pages/Tvseries"
 import MoviesPage from "./Pages/MoviesPage"
+import Footer from "./Components/Footer"
 
 
 const App = () => {
@@ -17,7 +18,7 @@ const App = () => {
     <BookmarkProvider>
       <Router>
 
-        <div className='md:flex'>
+        <div className='md:flex  relative'>
 
           <Nav />
           <Routes>
@@ -29,6 +30,7 @@ const App = () => {
             <Route path="/tvseries" element={<Tvseries />} />
             <Route path="/movies" element={<MoviesPage />} />
           </Routes>
+          <Footer />
 
         </div>
 

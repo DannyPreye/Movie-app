@@ -190,6 +190,7 @@ const MovieDetails = () => {
               clickFunc={reload}
               type={type === "movie" ? "movie" : "tv"}
             />
+            {console.log("Similar movies", similar)}
           </section>
         )
       ) : (
